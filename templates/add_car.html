@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+    <form action="http://127.0.0.1:5000/add_car" method="post">
+        <dl>
+            <dt>CPD：</dt>
+            <dd><input type="text" name="cpd" value="湘" disabled></dd>
+            <dt>车牌：</dt>
+            <dd><input type="text" name="hm" value=""></dd>
+            <dt>发动机号：</dt>
+            <dd><input type="text" name="fdj" value=""></dd>
+            <dt>收信地址：</dt>
+            <dd><input type="text" name="email" value="{{ session.username }}"></dd>
+            <dd><input type="submit" value="提交"> </dd>
+        </dl>
+    </form>
+{% endblock %}
