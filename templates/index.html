@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
     <div>欢迎来到违章查询首页！</div>
-    <div>增加车辆信息</div>
+    <div><a href="{{ url_for('add_car') }}">增加车辆信息</a> </div>
+    {% if session.username and cars %}
+        <table>
+            <tr><td>ID</td><td>CPD</td><td>HM</td><td>FDJ</td><td>EMAIL</td><td>WZXX</td><td>LASTUPDATE</td></tr>
+                {% for car in cars %}
+                    <tr><td>{{ car['id'] }}</td><td>{{ car['cpd'] }}</td><td>{{ car['hm'] }}</td><td>{{ car['fdj'] }}</td><td>{{ car['email'] }}</td><td>{{ car['wzxx'] }}</td><td>{{ car['lastupdate'] }}</td></tr>
+                {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}

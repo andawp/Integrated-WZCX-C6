@@ -39,11 +39,20 @@ def init_db():
         flash('数据库初始化失败，请重试！')
         return render_template('index.html')
 
-def insert_car(cpd, hm, fdj):
+def select_car(email = None):
+    db = get_db()
+    rv = db.execute('select * from carinfo where id=?', [email])
+    result = []
+    for row in rv:
+        result.append(dict(id=row[0], cpd=row[1], hm=row[2], fdj=row[3], email=row[4], wzxx=row[5], lastupdate=row[6]))
+    return result
+
+
+def insert_car(cpd, hm, fdj, email):
     error = True
     try:
         db = get_db()
-        db.execute('INSERT INTO carinfo (cdp, hm, fdj) VALUES (?,?,?)', [cpd, hm, fdj])
+        db.execute('INSERT INTO carinfo (cdp, hm, fdj, email) VALUES (?,?,?,?)', [cpd, hm, fdj, email])
         db.commit()
     except:
         error = False
@@ -65,13 +74,15 @@ def index():
 
 @app.route('/user/<code>')
 def user(code):
-    session['username'] = code if code else 'None'
-    return render_template('index.html')
+    if code:
+        result = select_car(email=code)
+        session['username'] = code
+    return render_template('index.html', cars=result)
 
 @app.route('/add_car', methods=['POST', 'GET'])
 def add_car():
     if request.method == 'POST':
-        cpd = request.form['cpd'] if request.form['cpd'] else '湘'
+        cpd = request.form['cpd']
         hm = request.form['hm']
         fdj = request.form['fdj']
         if cpd and hm and fdj:
