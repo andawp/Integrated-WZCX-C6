@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+    <meta charset="UTF-8">
+    <title>违章查询</title>
+<div id="page">
+    <div id="login">
+        {% if session.username %}
+        <div>尊敬的{{ session.username }},欢迎您使用违章自动查询系统！</div>
+        {% endif %}
+    </div>
+    {% block body %}{% endblock %}
+</div>
