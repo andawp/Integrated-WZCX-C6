@@ -2,11 +2,13 @@
 {% block body %}
     <div>欢迎来到违章查询首页！</div>
     <div><a href="{{ url_for('add_car') }}">增加车辆信息</a> </div>
-    {% if session.username and cars %}
+    {% if session.username %}
         <table>
-            <tr><td>ID</td><td>CPD</td><td>HM</td><td>FDJ</td><td>EMAIL</td><td>WZXX</td><td>LASTUPDATE</td></tr>
+            <tr><td>ID</td><td>CPD</td><td>车牌号</td><td>发动机号</td><td>EMAIL</td><td>文章信息</td><td>最后更新日期</td><td>编辑</td><td>删除</td></tr>
                 {% for car in cars %}
-                    <tr><td>{{ car['id'] }}</td><td>{{ car['cpd'] }}</td><td>{{ car['hm'] }}</td><td>{{ car['fdj'] }}</td><td>{{ car['email'] }}</td><td>{{ car['wzxx'] }}</td><td>{{ car['lastupdate'] }}</td></tr>
+                    <tr><td>{{ car['id'] }}</td><td>{{ car['cpd'] }}</td><td>{{ car['hm'] }}</td><td>{{ car['fdj'] }}</td><td>{{ car['email'] }}</td><td>{{ car['wzxx'] }}</td><td>{{ car['lastupdate'] }}</td><td><a href="{{ url_for('edit_car', id=car['id']) }}">编辑</a> </td><td><a
+                            href="{{ url_for('del_car', id=car['id']) }}">删除</a>
+                    </td></tr>
                 {% endfor %}
         </table>
     {% endif %}

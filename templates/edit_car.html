@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+    {% if car %}
+        <form action="{{ url_for('update_car')}}" method="post">
+            <dl>
+                <dt>ID</dt>
+                <dd><input type="text" value="{{ car[0] }}" name="id"></dd>
+                <dt>CPD</dt>
+                <dd><input type="text" value="{{ car[1] }}" name="cpd"></dd>
+                <dt>车牌号</dt>
+                <dd><input type="text" value="{{ car[2] }}" name="hm"> </dd>
+                <dt>发动机号码</dt>
+                <dd><input type="text" value="{{ car[3] }}" name="fdj"> </dd>
+                <dt>Email</dt>
+                <dd><input type="text" value="{{ car[4] }}" name="email"></dd>
+                <dt></dt>
+                <dd><input type="submit" value="提交"> </dd>
+            </dl>
+        </form>
+    {% endif %}
+{% endblock %}
